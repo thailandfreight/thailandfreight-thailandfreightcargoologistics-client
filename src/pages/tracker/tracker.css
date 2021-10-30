@@ -1,0 +1,48 @@
+.tracker {
+  min-height: 100vh;
+}
+
+.track-shipment th {
+  background: #143369;
+  padding: 10px;
+  color: #fff;
+  border: #fff solid 2px;
+}
+.track-shipment td {
+  background: #f7f7f7;
+  padding: 10px;
+  color: #333;
+  border: #fff solid 2px;
+}
+.track-shipment h4 {
+  font-size: 26px;
+}
+.track-shipment p {
+  font-size: 18px;
+  color: #333;
+}
+.track-shipment strong {
+  color: #4ab517;
+}
+
+.bg-img {
+  background: pink;
+  min-width: 100%;
+  background-image: url('../../img/section_bg1.jpg');
+  height: 100%;
+}
+
+.trackerStatus {
+  width: 50%;
+  margin: 0 auto 5rem auto;
+  text-align: center;
+  color: rgb(206, 201, 201);
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 0.5rem;
+}
+
+.pending {
+  background: green;
+  color: #fff;
+}

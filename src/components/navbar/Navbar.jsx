@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import './navbar.css';
 
 const Navbar = () => {
+  const [click, setClick] = useState(false);
+
+  const handleClick = () => setClick(!click);
   return (
     <>
       <header id="header" className="header">
@@ -10,12 +14,23 @@ const Navbar = () => {
               <img src="img/logo.jpg" className="logo-light" alt="logo" />
               <img src="img/logo.jpg" className="logo-dark" alt="logo" />
             </a>
-            <button className="navbar-toggler" type="button">
+            <button
+              className={click ? 'navbar-toggler actived' : 'navbar-toggler'}
+              type="button"
+              onClick={handleClick}
+            >
               <span className="menu-lines">
                 <span />
               </span>
             </button>
-            <div className="collapse navbar-collapse" id="mainNavigation">
+            <div
+              className={
+                click
+                  ? 'collapse navbar-collapse menu-opened'
+                  : 'collapse navbar-collapse'
+              }
+              id="mainNavigation"
+            >
               <ul className="navbar-nav ml-auto">
                 <li className="nav__item">
                   <a href="#slider" className="nav__item-link">

@@ -10,7 +10,11 @@ const Slider = () => {
         <p className="sliderQoute">
           Worldwide Air Freight, booking, collection, preparation and shipment.
         </p>
-        <button className="sliderButton">About us</button>
+        <div className="sliderContain sliderButton">
+          <a className="sliderButton" href="#about">
+            About us
+          </a>
+        </div>
       </div>
     </div>
   );

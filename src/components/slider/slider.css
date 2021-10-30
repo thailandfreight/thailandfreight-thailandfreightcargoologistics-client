@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 .slider {
   height: 100vh;
   width: 100%;
@@ -20,10 +22,13 @@
 .sliderTitle {
   font-size: 3.5rem;
   color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
 }
 
 .sliderQoute {
   font-weight: bold;
+  margin-bottom: 2rem;
 }
 
 .sliderButton {
@@ -31,6 +36,15 @@
   border: none;
   color: #000;
   background-color: #fff;
-  width: 7rem;
+  width: 15rem;
   margin-top: 1rem;
+  text-align: center;
+}
+
+.sliderButton:hover {
+  color: rgba(12, 11, 11, 0.329);
+}
+
+.slider a:hover {
+  color: rgb(82, 80, 80);
 }

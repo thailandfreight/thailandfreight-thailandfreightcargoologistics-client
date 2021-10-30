@@ -1,7 +1,35 @@
+import React, { useState } from 'react';
+
+import { useHistory } from 'react-router-dom';
+import TracksRepository from './TrackRepository';
+
 const Track = () => {
+  const [trackerId, setTrackerId] = useState('');
+  const [isTrack, setIsTrack] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const history = useHistory();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsTrack(true);
+      const res = await TracksRepository.singleProduct(trackerId);
+      setIsTrack(false);
+
+      if (res.data.trackerId === trackerId) {
+        setIsShow(true);
+        history.push('./tracker', { data: res.data, isShow: true });
+      }
+    } catch (err) {
+      setIsTrack(false);
+      alert('Invalid tracker ID');
+    }
+  };
+
   return (
     <>
       <div id="track"></div>
+      {/* {isShow ? ( */}
       <section
         id="trackOrder"
         className="request-quote request-quote-tabs p-80"
@@ -23,10 +51,7 @@ const Track = () => {
                   <div className="tab-pane fade show active" id="track">
                     <div className="request-quote-panel">
                       <div className="request__form-body">
-                        <form
-                          action="https://globalgrandlogistics.com/index.php"
-                          method="post"
-                        >
+                        <form>
                           <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <h5>Track Your Shipment</h5>
@@ -38,18 +63,18 @@ const Track = () => {
                                     name="trackingid"
                                     className="form-control"
                                     placeholder="Tracking Number"
+                                    onChange={(e) =>
+                                      setTrackerId(e.target.value)
+                                    }
                                   />
                                 </div>
                               </div>
-                            </div>
-                            {/* /.col-lg-12 */}
-                            <div className="col-sm-12 col-md-12 col-lg-12">
-                              <input
-                                type="submit"
-                                name="tracknow"
-                                defaultValue="Track Now"
+                              <button
+                                onClick={handleSubmit}
                                 className="btn btn__secondary btn__block"
-                              />
+                              >
+                                {isTrack ? 'Submitting...' : 'Submit'}
+                              </button>
                             </div>
                             {/* /.col-lg-12 */}
                           </div>
@@ -90,6 +115,9 @@ const Track = () => {
         </div>
         {/* /.container */}
       </section>
+      {/* ) : (
+        <div>Input a valid Tracking Number</div>
+      )} */}
     </>
   );
 };
