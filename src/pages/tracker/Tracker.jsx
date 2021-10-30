@@ -19,7 +19,7 @@ const Tracker = () => {
     name,
     addressFrom,
     addressTo
-  } = data.data;
+  } = data?.data || {};
   return (
     <>
       {data?.isShow ? (

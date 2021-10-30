@@ -15,6 +15,19 @@ const NetworkConfig = async (data) => {
     const response = await axios.get(data.path, headers);
     return response;
   }
+
+  // POST
+  if (data.method === 'post') {
+    // const headers = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `bearer ${token}`
+    //   }
+    // };
+    const response = await axios.post(data.path, data.body, headers);
+
+    return response;
+  }
 };
 
 export default NetworkConfig;
