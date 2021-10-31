@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -9,10 +10,10 @@ const Navbar = () => {
       <header id="header" className="header">
         <nav className="navbar navbar-expand-lg sticky-navbar">
           <div className="container">
-            <a className="navbar-brand" href="index.html">
+            <Link to="/" className="navbar-brand" href="index.html">
               <img src="img/logo.jpg" className="logo-light" alt="logo" />
               <img src="img/logo.jpg" className="logo-dark" alt="logo" />
-            </a>
+            </Link>
             <button
               className={click ? 'navbar-toggler actived' : 'navbar-toggler'}
               type="button"
