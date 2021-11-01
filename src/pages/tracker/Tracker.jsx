@@ -1,4 +1,5 @@
 import { Link, useLocation, Redirect } from 'react-router-dom';
+import { CardGiftcard } from '@material-ui/icons';
 import './tracker.css';
 
 const Tracker = () => {
@@ -8,7 +9,6 @@ const Tracker = () => {
 
   const {
     trackerId,
-    status,
     start,
     end,
     item,
@@ -20,6 +20,24 @@ const Tracker = () => {
     addressFrom,
     addressTo
   } = data?.data || {};
+
+  // console.log('status ||', status[0]);
+  const status = data?.data.status[0];
+  console.log('tracker', status);
+
+  if (status === 'processing') {
+    var msg = 'Processing';
+    var color = 'orange';
+  } else if (status === 'transit') {
+    var msg = 'In Transit';
+    var color = 'blue';
+  } else if (status === 'ready') {
+    var msg = 'Ready for Pickup';
+    var color = 'green';
+  } else {
+    var msg = 'NILL';
+  }
+
   return (
     <>
       {data?.isShow ? (
@@ -39,7 +57,7 @@ const Tracker = () => {
                       <span
                         style={{ textTransform: 'uppercase', fontSize: 24 }}
                       >
-                        (Status: {status} )
+                        (Status: {msg} )
                       </span>
                     </h1>
                     <nav aria-label="breadcrumb">
@@ -64,7 +82,26 @@ const Tracker = () => {
           {/* start */}
           <section id="trackShipmeent" className="track-shipment pb-60">
             <div className="container">
-              <div className="trackerStatus pending">Status: {status}</div>
+              <div
+                className="trackerStatus"
+                style={{ backgroundColor: `${color}` }}
+              >
+                Status: {msg}
+                {color === 'green' ? (
+                  <CardGiftcard className="delivered" />
+                ) : (
+                  <svg className="spinner" viewBox="0 0 50 50">
+                    <circle
+                      class="path"
+                      cx="25"
+                      cy="25"
+                      r="20"
+                      fill="none"
+                      stroke-width="5"
+                    ></circle>
+                  </svg>
+                )}
+              </div>
               <div className="row">
                 <div className="col-md-6">
                   <h4>SHIPMENT DATES</h4>

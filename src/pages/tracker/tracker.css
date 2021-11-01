@@ -36,13 +36,51 @@
   width: 50%;
   margin: 0 auto 5rem auto;
   text-align: center;
-  color: rgb(206, 201, 201);
+  color: #fff;
   font-weight: 700;
   border-radius: 100px;
   padding: 0.5rem;
 }
 
-.pending {
-  background: green;
-  color: #fff;
+.delivered {
+  font-size: 2rem !important;
+  margin-left: 15px;
+}
+
+/* SVG STYLE */
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  /* position: absolute; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* margin: -25px 0 0 -25px; */
+  width: 20px;
+  height: 50px;
+  margin-left: 15px;
+}
+.spinner .path {
+  stroke: #ffffff;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }

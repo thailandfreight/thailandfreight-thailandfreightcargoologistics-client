@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import DashboardsBloc from './DashboardBloc';
 
 const Container = styled.div`
   min-height: 75vh;
@@ -77,6 +78,60 @@ const Dashboard = () => {
   const [addressFrom, setAddressFrom] = useState('');
   const [addressTo, setAddressTo] = useState('');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(
+      trackerId,
+      status,
+      start,
+      end,
+      item,
+      packageForm,
+      weight,
+      quantity,
+      mode,
+      name,
+      addressFrom,
+      addressTo
+    );
+
+    // const data = {
+    //   trackerId,
+    //   status,
+    //   start,
+    //   end,
+    //   item,
+    //   packageForm,
+    //   weight,
+    //   quantity,
+    //   mode,
+    //   name,
+    //   addressFrom,
+    //   addressTo
+    // };
+
+    try {
+      const isUpdate = await DashboardsBloc.updateProduct(
+        trackerId,
+        status,
+        start,
+        end,
+        item,
+        packageForm,
+        weight,
+        quantity,
+        mode,
+        name,
+        addressFrom,
+        addressTo
+      );
+      console.log('isUpdate', isUpdate);
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -84,7 +139,12 @@ const Dashboard = () => {
           <FormItem>
             <Label>Tracker ID</Label>
             <Input
-              placeholder="tracker ID"
+              style={{ cursor: 'not-allowed' }}
+              // disabled
+              // value="5214467592"
+              // defaultValue="5214467592"
+              required
+              // placeholder="4214467592"
               type="text"
               onChange={(e) => setTrackerId(e.target.value)}
             />
@@ -171,18 +231,16 @@ const Dashboard = () => {
           </FormItem>
           <FormItem>
             <Label>Status</Label>
-            <Select>
+            <Select onChange={(e) => setStatus(e.target.value)}>
               <Option>Change Status</Option>
-              <Option onChange={(e) => setStatus(e.target.value)}>
-                Processing
-              </Option>
-              <Option>In Transit</Option>
-              <Option>Ready For Pickup</Option>
+              <Option value="processing">Processing</Option>
+              <Option value="transit">In Transit</Option>
+              <Option value="ready">Ready For Pickup</Option>
             </Select>
           </FormItem>
           <FormItem>
             <Label></Label>
-            <Button>Update</Button>
+            <Button onClick={handleSubmit}>Update</Button>
           </FormItem>
         </Form>
       </Wrapper>

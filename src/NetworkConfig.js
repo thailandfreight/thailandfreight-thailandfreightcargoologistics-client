@@ -1,7 +1,8 @@
 const axios = require('axios');
 
 const NetworkConfig = async (data) => {
-  // var token = window.localStorage.getItem('token') || [];
+  var token = window.localStorage.getItem('token') || [];
+  console.log(token);
 
   const headers = {
     // headers: {
@@ -18,14 +19,19 @@ const NetworkConfig = async (data) => {
 
   // POST
   if (data.method === 'post') {
-    // const headers = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `bearer ${token}`
-    //   }
-    // };
-    const response = await axios.post(data.path, data.body, headers);
+    const response = await axios.post(data.path, data.body);
+    return response;
+  }
 
+  // UPDATE
+  if (data.method === 'put') {
+    const headers = {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `Bearer ${token}`
+      }
+    };
+    const response = await axios.put(data.path, data.body, headers);
     return response;
   }
 };

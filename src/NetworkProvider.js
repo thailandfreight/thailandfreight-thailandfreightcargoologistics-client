@@ -3,10 +3,13 @@ const NetworkProvider = () => {
 
   const LOGIN_URL = BASE_URL + 'auth/login';
 
-  const SINGLE_TRACKER = (trackerId) =>
-    BASE_URL + `products/findone/${trackerId}`;
+  const SINGLE_TRACKER = (productId) =>
+    BASE_URL + `products/findone/${productId}`;
 
-  return { BASE_URL, LOGIN_URL, SINGLE_TRACKER };
+  const UPDATE_TRACKER = (trackerId) =>
+    BASE_URL + `products/update/${trackerId}`;
+
+  return { BASE_URL, LOGIN_URL, SINGLE_TRACKER, UPDATE_TRACKER };
 };
 
 export default NetworkProvider;

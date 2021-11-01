@@ -1,10 +1,26 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { ProductContext } from '../../ProductProvider';
 
 const Navbar = () => {
+  const history = useHistory();
   const [click, setClick] = useState(false);
 
+  const { isAdminStatus } = useContext(ProductContext);
+
   const handleClick = () => setClick(!click);
+
+  const handleLogout = () => {
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+
+    if (isAdminStatus) {
+      <Redirect to="/admin" />;
+      history.push('/admin');
+    }
+  };
+
   return (
     <>
       <header id="header" className="header">
@@ -31,28 +47,43 @@ const Navbar = () => {
               }
               id="mainNavigation"
             >
-              <ul className="navbar-nav ml-auto">
-                <li className="nav__item">
-                  <a href="#slider" className="nav__item-link">
-                    Home
-                  </a>
-                </li>
-                <li className="nav__item">
-                  <a href="#about" className="nav__item-link">
-                    About Us
-                  </a>
-                </li>
-                <li className="nav__item">
-                  <a href="#track" className="nav__item-link">
-                    Track Shipment
-                  </a>
-                </li>
-                <li className="nav__item">
-                  <a href="#footer" className="nav__item-link">
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
+              {!isAdminStatus ? (
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav__item">
+                    <a href="#slider" className="nav__item-link">
+                      Home
+                    </a>
+                  </li>
+                  <li className="nav__item">
+                    <a href="#about" className="nav__item-link">
+                      About Us
+                    </a>
+                  </li>
+                  <li className="nav__item">
+                    <a href="#track" className="nav__item-link">
+                      Track Shipment
+                    </a>
+                  </li>
+                  <li className="nav__item">
+                    <a href="#footer" className="nav__item-link">
+                      Contact Us
+                    </a>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav__item">
+                    <Link to="/" className="nav__item-link">
+                      Home
+                    </Link>
+                  </li>
+                  <li className="nav__item">
+                    <button onClick={handleLogout} className="nav__item-link">
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              )}
               {/* /.navbar-nav */}
             </div>
             {/* /.navbar-collapse */}

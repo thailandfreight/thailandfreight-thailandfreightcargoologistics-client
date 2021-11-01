@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TracksRepository from './components/track/TrackRepository';
 
 // CONTEXT
@@ -7,6 +7,13 @@ const ProductContext = React.createContext(null);
 const ProductProvider = (props) => {
   const [productData, setProductData] = useState([]);
   const [isProduct, setIsProduct] = useState(false);
+
+  const [isAdminStatus, setIsAdminStatus] = useState(null);
+
+  useEffect(() => {
+    const isAdmin = localStorage.getItem('isAdmin');
+    setIsAdminStatus(isAdmin);
+  }, []);
 
   const singleProduct = async (trackerId) => {
     try {
@@ -20,7 +27,9 @@ const ProductProvider = (props) => {
   };
 
   return (
-    <ProductContext.Provider value={{ singleProduct, productData, isProduct }}>
+    <ProductContext.Provider
+      value={{ singleProduct, productData, isProduct, isAdminStatus }}
+    >
       {props.children}
     </ProductContext.Provider>
   );
