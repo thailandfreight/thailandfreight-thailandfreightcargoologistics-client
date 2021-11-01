@@ -42,7 +42,12 @@
   padding: 0.5rem;
 }
 
-.delivered {
+.deliveredIcon {
+  font-size: 2rem !important;
+  margin-left: 15px;
+}
+
+.processingIcon {
   font-size: 2rem !important;
   margin-left: 15px;
 }

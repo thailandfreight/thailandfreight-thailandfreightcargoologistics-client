@@ -32,15 +32,20 @@ const Footer = () => {
                 <h6 className="footer__widget-title">Contact Us</h6>
                 <div className="footer__widget-content">
                   <p>
-                    1353 Caldwell Road Rochester, <br />
-                    New York 14608, United States
+                    Thai Shipping Agencies & Trading Co., Ltd. <br />
+                    TSC Bldg., 3360 Soi Manorom Rama IV Road, Klong Ton, Klong
+                    Toey, Bangkok 10110, Thailand
                   </p>
                   <ul className="contact__list list-unstyled">
                     <li>
-                      <span>info@globalgrandlogistics.com</span>
+                      <span>
+                        Email: thailandfreightcargologistics@gmail.com
+                      </span>
                     </li>
                     <li>
-                      <span>+1 872-465-1250</span>
+                      <span>
+                        Tel: 02-249-9566 Fax: 02-249-3873, 02-249-8447{' '}
+                      </span>
                     </li>
                   </ul>
                 </div>

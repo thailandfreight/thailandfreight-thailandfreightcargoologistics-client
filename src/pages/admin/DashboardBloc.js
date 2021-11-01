@@ -16,7 +16,7 @@ const updateProduct = async (
   addressTo
 ) => {
   const data = {
-    trackerId: trackerId,
+    trackerId: '5214467592',
     status: status,
     start: start,
     end: end,

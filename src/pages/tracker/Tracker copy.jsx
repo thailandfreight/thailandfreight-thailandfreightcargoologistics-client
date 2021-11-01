@@ -1,5 +1,5 @@
 import { Link, useLocation, Redirect } from 'react-router-dom';
-import { CardGiftcard, WatchLater } from '@material-ui/icons';
+import { CardGiftcard } from '@material-ui/icons';
 import './tracker.css';
 
 const Tracker = () => {
@@ -9,7 +9,6 @@ const Tracker = () => {
 
   const {
     trackerId,
-    status,
     start,
     end,
     item,
@@ -23,27 +22,20 @@ const Tracker = () => {
   } = data?.data || {};
 
   // console.log('status ||', status[0]);
-  // const status = data?.data.status[0].toString();
-  // console.log('status', status[0]);
-  const s = status[0];
-  // const s = JSON.stringify(status[0]);
-  // const s = 'ready';
-  // console.log('s', s);
+  const status = data?.data.status[0];
 
-  // const status = 'processing';
-
-  // if (status === 'processing') {
-  //   var msg = 'Processing';
-  //   var color = 'orange';
-  // } else if (status === 'transit') {
-  //   var msg = 'In Transit';
-  //   var color = 'blue';
-  // } else if (status === 'ready') {
-  //   var msg = 'Ready for Pickup';
-  //   var color = 'green';
-  // } else {
-  //   var msg = 'NILL';
-  // }
+  if (status === 'processing') {
+    var msg = 'Processing';
+    var color = 'orange';
+  } else if (status === 'transit') {
+    var msg = 'In Transit';
+    var color = 'blue';
+  } else if (status === 'ready') {
+    var msg = 'Ready for Pickup';
+    var color = 'green';
+  } else {
+    var msg = 'NILL';
+  }
 
   return (
     <>
@@ -64,7 +56,7 @@ const Tracker = () => {
                       <span
                         style={{ textTransform: 'uppercase', fontSize: 24 }}
                       >
-                        (Status: {status} )
+                        (Status: {msg} )
                       </span>
                     </h1>
                     <nav aria-label="breadcrumb">
@@ -89,53 +81,26 @@ const Tracker = () => {
           {/* start */}
           <section id="trackShipmeent" className="track-shipment pb-60">
             <div className="container">
-              {/* 1 */}
-              {(() => {
-                switch (s) {
-                  case 'processing':
-                    return (
-                      <div
-                        className="trackerStatus"
-                        style={{ backgroundColor: 'orange' }}
-                      >
-                        Status: Processing. . .
-                        <WatchLater className="processingIcon" />
-                      </div>
-                    );
-                  case 'transit':
-                    return (
-                      <div
-                        className="trackerStatus"
-                        style={{ backgroundColor: 'blue' }}
-                      >
-                        Status: In transit
-                        <svg className="spinner" viewBox="0 0 50 50">
-                          <circle
-                            className="path"
-                            cx="25"
-                            cy="25"
-                            r="20"
-                            fill="none"
-                            strokeWidth="5"
-                          ></circle>
-                        </svg>
-                      </div>
-                    );
-                  case 'ready':
-                    return (
-                      <div
-                        className="trackerStatus"
-                        style={{ backgroundColor: 'green' }}
-                      >
-                        Status: Ready for Pickup
-                        <CardGiftcard className="deliveredIcon" />
-                      </div>
-                    );
-                  default:
-                    return <div>Nill</div>;
-                }
-              })()}
-              {/* 1 */}
+              <div
+                className="trackerStatus"
+                style={{ backgroundColor: `${color}` }}
+              >
+                Status: {msg}
+                {color === 'green' ? (
+                  <CardGiftcard className="delivered" />
+                ) : (
+                  <svg className="spinner" viewBox="0 0 50 50">
+                    <circle
+                      className="path"
+                      cx="25"
+                      cy="25"
+                      r="20"
+                      fill="none"
+                      strokeWidth="5"
+                    ></circle>
+                  </svg>
+                )}
+              </div>
               <div className="row">
                 <div className="col-md-6">
                   <h4>SHIPMENT DATES</h4>

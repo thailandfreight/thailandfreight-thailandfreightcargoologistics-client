@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import DashboardsBloc from './DashboardBloc';
-import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
   min-height: 75vh;
@@ -66,7 +65,6 @@ const Button = styled.button`
 `;
 
 const Dashboard = () => {
-  const history = useHistory();
   const [trackerId, setTrackerId] = useState('');
   const [status, setStatus] = useState('');
   const [start, setStart] = useState('');
@@ -142,11 +140,9 @@ const Dashboard = () => {
             <Label>Tracker ID</Label>
             <Input
               style={{ cursor: 'not-allowed' }}
-              // disabled
-              // value="5214467592"
-              // defaultValue="5214467592"
-              required
-              // placeholder="4214467592"
+              disabled
+              value="5214467592"
+              placeholder="Enter Tracker ID"
               type="text"
               onChange={(e) => setTrackerId(e.target.value)}
             />
@@ -154,6 +150,8 @@ const Dashboard = () => {
           <FormItem>
             <Label>Name of Reciever</Label>
             <Input
+              required={true}
+              pattern="^[A-Za]{3,16}$"
               placeholder="name of reciever"
               type="text"
               onChange={(e) => setName(e.target.value)}
