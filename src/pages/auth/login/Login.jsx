@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { ProductContext } from '../../../ProductProvider';
 import { useHistory } from 'react-router-dom';
 import AuthsBloc from './AuthBloc';
 import SessionManager from '../../../Session_Manager';
@@ -8,6 +9,8 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isStatus, setIsStatus] = useState(false);
+
+  const { isAdminStatus, setIsAdminStatus } = useContext(ProductContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,14 +26,19 @@ const Login = () => {
       if (isLogin) {
         setIsStatus(false);
         const res = isLogin.data;
+        setIsAdminStatus(true);
         SessionManager(res);
-        history.push('/dashboard', res);
+
+        if (localStorage.getItem('isAdmin') === 'true') {
+          history.push('/dashboard', res);
+        }
       }
     } catch (err) {
       setIsStatus(false);
       alert('Incorrect uername or password', err);
     }
   };
+  console.log('context', isAdminStatus);
   return (
     <div
       style={{

@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import TracksRepository from './components/track/TrackRepository';
+import Repo from './components/track/TrackRepository';
 
 // CONTEXT
 const ProductContext = React.createContext(null);
 
 const ProductProvider = (props) => {
-  const [productData, setProductData] = useState([]);
-  const [isProduct, setIsProduct] = useState(false);
+  // useState
+  const [doSomething, setDoSomething] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isAdminStatus, setIsAdminStatus] = useState(false);
 
-  const [isAdminStatus, setIsAdminStatus] = useState(null);
-
+  // useEffect
   useEffect(() => {
     const isAdmin = localStorage.getItem('isAdmin');
     setIsAdminStatus(isAdmin);
   }, []);
 
-  const singleProduct = async (trackerId) => {
+  // blocFunc
+  const doSomethingBloc = async (params) => {
     try {
-      const res = await TracksRepository.singleProduct(trackerId);
+      const res = await Repo.updateProduct(params);
       const result = await res.data;
-      result.trackerId === trackerId && setIsProduct(true);
-      setProductData(result);
+      setDoSomething(result);
     } catch (err) {
-      alert('Invalid track ID: ' + trackerId);
+      alert('Error occured: ' + err);
     }
   };
 
   return (
     <ProductContext.Provider
-      value={{ singleProduct, productData, isProduct, isAdminStatus }}
+      value={{
+        doSomethingBloc,
+        setDoSomething,
+        doSomething,
+        isSuccess,
+        setIsSuccess,
+        isAdminStatus,
+        setIsAdminStatus
+      }}
     >
       {props.children}
     </ProductContext.Provider>

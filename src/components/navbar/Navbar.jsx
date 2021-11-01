@@ -6,7 +6,7 @@ const Navbar = () => {
   const history = useHistory();
   const [click, setClick] = useState(false);
 
-  const { isAdminStatus } = useContext(ProductContext);
+  const { isAdminStatus, setIsAdminStatus } = useContext(ProductContext);
 
   const handleClick = () => setClick(!click);
 
@@ -14,6 +14,7 @@ const Navbar = () => {
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('username');
     localStorage.removeItem('token');
+    setIsAdminStatus(false);
 
     if (isAdminStatus) {
       <Redirect to="/admin" />;
@@ -50,9 +51,9 @@ const Navbar = () => {
               {!isAdminStatus ? (
                 <ul className="navbar-nav ml-auto">
                   <li className="nav__item">
-                    <a href="#slider" className="nav__item-link">
+                    <Link to="/" className="nav__item-link">
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav__item">
                     <a href="#about" className="nav__item-link">

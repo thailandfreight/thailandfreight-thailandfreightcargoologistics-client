@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import DashboardsBloc from './DashboardBloc';
+import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
   min-height: 75vh;
@@ -65,6 +66,7 @@ const Button = styled.button`
 `;
 
 const Dashboard = () => {
+  const history = useHistory();
   const [trackerId, setTrackerId] = useState('');
   const [status, setStatus] = useState('');
   const [start, setStart] = useState('');
