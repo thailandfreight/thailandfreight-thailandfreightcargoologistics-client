@@ -16,7 +16,7 @@ const updateProduct = async (
   addressTo
 ) => {
   const data = {
-    trackerId: '5214467592',
+    trackerId: '282823267405',
     status: status,
     start: start,
     end: end,
@@ -29,10 +29,9 @@ const updateProduct = async (
     addressFrom: addressFrom,
     addressT: addressTo
   };
-  console.log('data_bloc', data);
+
   try {
     const res = await DashboardsRepository.updateProduct(data);
-    console.log(res);
     return res;
   } catch (err) {
     const errorMessage = {

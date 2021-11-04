@@ -2,7 +2,6 @@ const axios = require('axios');
 
 const NetworkConfig = async (data) => {
   var token = window.localStorage.getItem('token') || [];
-  console.log(token);
 
   const headers = {
     // headers: {

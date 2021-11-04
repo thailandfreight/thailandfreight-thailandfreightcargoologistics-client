@@ -2,7 +2,6 @@ import NetworkConfig from '../../NetworkConfig';
 import NetworkProvider from '../../NetworkProvider';
 
 const updateProduct = async (data) => {
-  console.log('dataRepo');
   try {
     const res = await NetworkConfig({
       path: NetworkProvider().UPDATE_TRACKER(data.trackerId),

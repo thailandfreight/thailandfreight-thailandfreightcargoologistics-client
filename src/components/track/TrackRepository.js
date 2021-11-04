@@ -15,7 +15,6 @@ const singleProduct = async (params) => {
 };
 
 const updateProduct = async (data) => {
-  console.log('dataRepo');
   try {
     const res = await NetworkConfig({
       path: NetworkProvider().UPDATE_TRACKER(data.trackerId),

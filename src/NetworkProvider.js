@@ -1,5 +1,6 @@
 const NetworkProvider = () => {
-  const BASE_URL = 'http://localhost:5000/api/v1/';
+  const BASE_URL =
+    'https://thailandfreightcargoologistics.herokuapp.com/api/v1/';
 
   const LOGIN_URL = BASE_URL + 'auth/login';
 

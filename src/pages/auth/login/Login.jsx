@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { ProductContext } from '../../../ProductProvider';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import AuthsBloc from './AuthBloc';
 import SessionManager from '../../../Session_Manager';
 
@@ -15,7 +15,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(username, password);
     const data = {
       username,
       password
@@ -38,41 +37,72 @@ const Login = () => {
       alert('Incorrect uername or password', err);
     }
   };
-  console.log('context', isAdminStatus);
+
+  useEffect(() => {
+    const admiin = () => {
+      try {
+        // console.log('contextxx', isAdminStatus);
+        if (isAdminStatus) {
+          <Redirect to="/" />;
+        }
+      } catch (err) {
+      } finally {
+        // hhh.push('/dashboard');
+      }
+    };
+
+    admiin();
+  }, []);
+
+  // {
+  //   isAdminStatus && <Redirect to="/dashboard" />;
+  // }
+
+  // const makeRequest = () => {
+  // if (isAdminStatus) {
+  //   console.log('contextxx', isAdminStatus);
+  //   // history.push('/dashboard');
+  //   return <Redirect to="/dashboard" />;
+  // }
+  // return makeRequest;
+  // };
+
   return (
-    <div
-      style={{
-        height: '50vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <input
-        style={{ padding: 10, marginBottom: 20 }}
-        type="text"
-        placeholder="username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        style={{ padding: 10, marginBottom: 20 }}
-        type="password"
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button
-        onClick={handleSubmit}
+    <>
+      <div
         style={{
-          padding: 10,
-          width: 100,
-          background: '#0a0606',
-          color: '#fff'
+          height: '50vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        {isStatus ? 'Loading..' : 'Login'}
-      </button>
-    </div>
+        <input
+          style={{ padding: 10, marginBottom: 20 }}
+          type="text"
+          placeholder="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          style={{ padding: 10, marginBottom: 20 }}
+          type="password"
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          onClick={handleSubmit}
+          style={{
+            padding: 10,
+            width: 100,
+            background: '#0a0606',
+            color: '#fff'
+          }}
+        >
+          {isStatus ? 'Loading..' : 'Login'}
+        </button>
+      </div>
+    </>
   );
 };
 

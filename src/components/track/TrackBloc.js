@@ -4,8 +4,6 @@ import TracksRepository from './TrackRepository';
 const singleProduct = async (params) => {
   try {
     const res = await TracksRepository.singleProduct(params);
-
-    console.log(res);
     return res;
   } catch (e) {
     const errorMessage = {

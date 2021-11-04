@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import DashboardsBloc from './DashboardBloc';
+import { useState, useContext } from 'react';
+import { ProductContext } from '../../ProductProvider';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Container = styled.div`
   min-height: 75vh;
@@ -65,6 +67,7 @@ const Button = styled.button`
 `;
 
 const Dashboard = () => {
+  const history = useHistory();
   const [trackerId, setTrackerId] = useState('');
   const [status, setStatus] = useState('');
   const [start, setStart] = useState('');
@@ -78,23 +81,30 @@ const Dashboard = () => {
   const [addressFrom, setAddressFrom] = useState('');
   const [addressTo, setAddressTo] = useState('');
 
+  const { isAdminStatus } = useContext(ProductContext);
+
+  if (isAdminStatus === null || isAdminStatus !== true) {
+    <Redirect to="/admin" />;
+    history.push('/admin');
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(
-      trackerId,
-      status,
-      start,
-      end,
-      item,
-      packageForm,
-      weight,
-      quantity,
-      mode,
-      name,
-      addressFrom,
-      addressTo
-    );
+    // console.log(
+    //   trackerId,
+    //   status,
+    //   start,
+    //   end,
+    //   item,
+    //   packageForm,
+    //   weight,
+    //   quantity,
+    //   mode,
+    //   name,
+    //   addressFrom,
+    //   addressTo
+    // );
 
     // const data = {
     //   trackerId,
@@ -126,9 +136,8 @@ const Dashboard = () => {
         addressFrom,
         addressTo
       );
-      console.log('isUpdate', isUpdate);
     } catch (err) {
-      console.log('error', err);
+      console.error('error', err);
     }
   };
 
@@ -141,7 +150,7 @@ const Dashboard = () => {
             <Input
               style={{ cursor: 'not-allowed' }}
               disabled
-              value="5214467592"
+              value="282823267405"
               placeholder="Enter Tracker ID"
               type="text"
               onChange={(e) => setTrackerId(e.target.value)}
