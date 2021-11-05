@@ -80,6 +80,7 @@ const Dashboard = () => {
   const [name, setName] = useState('');
   const [addressFrom, setAddressFrom] = useState('');
   const [addressTo, setAddressTo] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const { isAdminStatus } = useContext(ProductContext);
 
@@ -122,6 +123,7 @@ const Dashboard = () => {
     // };
 
     try {
+      setIsLoading(true);
       const isUpdate = await DashboardsBloc.updateProduct(
         trackerId,
         status,
@@ -136,8 +138,11 @@ const Dashboard = () => {
         addressFrom,
         addressTo
       );
+      setIsLoading(false);
+      alert('Goods Updated');
     } catch (err) {
-      console.error('error', err);
+      setIsLoading(false);
+      alert('An Error Occured');
     }
   };
 
@@ -193,7 +198,7 @@ const Dashboard = () => {
           <FormItem>
             <Label>Package form</Label>
             <Input
-              placeholder="Package form"
+              placeholder="Box, Parcel e.t.c.."
               type="text"
               onChange={(e) => setPackageForm(e.target.value)}
             />
@@ -249,7 +254,9 @@ const Dashboard = () => {
           </FormItem>
           <FormItem>
             <Label></Label>
-            <Button onClick={handleSubmit}>Update</Button>
+            <Button onClick={handleSubmit}>
+              {isLoading ? 'Updating' : 'Update'}
+            </Button>
           </FormItem>
         </Form>
       </Wrapper>
