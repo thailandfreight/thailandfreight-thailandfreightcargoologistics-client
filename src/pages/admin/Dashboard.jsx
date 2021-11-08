@@ -52,7 +52,7 @@ const Button = styled.button`
   padding: 0.9rem 1rem;
   border: 1px solid #ccc;
   margin: 1rem 0 0 0;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
   display: block;
   display: flex;
   flex: 1;

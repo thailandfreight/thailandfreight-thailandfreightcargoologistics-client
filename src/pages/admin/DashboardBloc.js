@@ -27,7 +27,7 @@ const updateProduct = async (
     mode: mode,
     name: name,
     addressFrom: addressFrom,
-    addressT: addressTo
+    addressTo: addressTo
   };
 
   try {
